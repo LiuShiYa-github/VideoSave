@@ -52,7 +52,7 @@
 **Mac**
 
 ```shell
-(venv) reqiqiu@reqiqiundiannao VideoSave % ./venv/bin/pyinstaller -w -D  --name "VideoSave" --icon=icon.ico  --collect-datas=fake_useragent  app.py 
+(venv) reqiqiu@reqiqiundiannao VideoSave % ./venv/bin/pyinstaller -w --name "VideoSave" --icon=icon.ico  --collect-datas=fake_useragent -D app.py
 119 INFO: PyInstaller: 6.1.0
 119 INFO: Python: 3.11.6
 126 INFO: Platform: macOS-13.0-arm64-arm-64bit
