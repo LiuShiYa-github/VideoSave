@@ -3,7 +3,7 @@
 [![Python Version](https://img.shields.io/badge/python-3.11+-green)](https://www.python.org)
 [![CI status](https://github.com/smicallef/spiderfoot/workflows/Tests/badge.svg)](https://github.com/LiuShiYa-github/PythonSpider/actions)
 
-<img src="assets/image-20231117105927668.png" alt="image-20231117105927668" style="zoom: 33%;" />
+![Snipaste_2023-11-17_11-25-49](assets/Snipaste_2023-11-17_11-25-49.png)
 
 #### 需求背景
 
