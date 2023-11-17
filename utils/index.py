@@ -38,13 +38,15 @@ class Ui_Form(object):
         self.tabWidget.setIconSize(QSize(20, 20))
         self.tab = QWidget()
         self.tab.setObjectName(u"tab")
-        self.verticalWidget_2 = QWidget(self.tab)
-        self.verticalWidget_2.setObjectName(u"verticalWidget_2")
-        self.verticalWidget_2.setGeometry(QRect(10, 60, 281, 171))
-        self.verticalLayout_2 = QVBoxLayout(self.verticalWidget_2)
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.login_username = QLineEdit(self.verticalWidget_2)
+        self.label_Gitee = QLabel(self.tab)
+        self.label_Gitee.setObjectName(u"label_Gitee")
+        self.label_Gitee.setGeometry(QRect(100, 210, 41, 16))
+        self.label_GitHub = QLabel(self.tab)
+        self.label_GitHub.setObjectName(u"label_GitHub")
+        self.label_GitHub.setGeometry(QRect(180, 210, 61, 16))
+        self.login_username = QLineEdit(self.tab)
         self.login_username.setObjectName(u"login_username")
+        self.login_username.setGeometry(QRect(30, 90, 257, 25))
         font1 = QFont()
         font1.setFamilies([u".AppleSystemUIFont"])
         font1.setPointSize(18)
@@ -58,11 +60,9 @@ class Ui_Form(object):
 "selection-background-color: darkgray;\n"
 "   ")
         self.login_username.setClearButtonEnabled(True)
-
-        self.verticalLayout_2.addWidget(self.login_username)
-
-        self.login_password = QLineEdit(self.verticalWidget_2)
+        self.login_password = QLineEdit(self.tab)
         self.login_password.setObjectName(u"login_password")
+        self.login_password.setGeometry(QRect(30, 150, 257, 25))
         self.login_password.setFont(font1)
         self.login_password.setStyleSheet(u"border: 1px solid grey;/*\u8bbe\u7f6e\u8fb9\u6846\u7684\u7c97\u7ec6\uff0c\u4ee5\u53ca\u989c\u8272*/\n"
 "border-radius: 10px;/*\u8bbe\u7f6e\u5706\u89d2\u7684\u5927\u5c0f*/\n"
@@ -71,15 +71,6 @@ class Ui_Form(object):
 "   ")
         self.login_password.setEchoMode(QLineEdit.Password)
         self.login_password.setClearButtonEnabled(True)
-
-        self.verticalLayout_2.addWidget(self.login_password)
-
-        self.label_Gitee = QLabel(self.tab)
-        self.label_Gitee.setObjectName(u"label_Gitee")
-        self.label_Gitee.setGeometry(QRect(80, 230, 41, 16))
-        self.label_GitHub = QLabel(self.tab)
-        self.label_GitHub.setObjectName(u"label_GitHub")
-        self.label_GitHub.setGeometry(QRect(150, 230, 61, 16))
         self.tabWidget.addTab(self.tab, "")
         self.tab_2 = QWidget()
         self.tab_2.setObjectName(u"tab_2")
@@ -155,6 +146,8 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"\u767b\u5f55", None))
+        self.label_Gitee.setText(QCoreApplication.translate("Form", u"Gitee", None))
+        self.label_GitHub.setText(QCoreApplication.translate("Form", u"GitHub", None))
 #if QT_CONFIG(tooltip)
         self.login_username.setToolTip(QCoreApplication.translate("Form", u"<html><head/><body><p>\u8bf7\u8f93\u5165\u8d26\u6237\u540d</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -165,8 +158,6 @@ class Ui_Form(object):
         self.login_password.setInputMask("")
         self.login_password.setText("")
         self.login_password.setPlaceholderText(QCoreApplication.translate("Form", u"\u8bf7\u8f93\u5165\u5bc6\u7801\uff1a", u"placeholder"))
-        self.label_Gitee.setText(QCoreApplication.translate("Form", u"Gitee", None))
-        self.label_GitHub.setText(QCoreApplication.translate("Form", u"GitHub", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("Form", u"    \u767b\u5f55    ", None))
 #if QT_CONFIG(tooltip)
         self.register_username.setToolTip(QCoreApplication.translate("Form", u"<html><head/><body><p>\u8bf7\u8f93\u5165\u8d26\u6237\u540d</p></body></html>", None))
