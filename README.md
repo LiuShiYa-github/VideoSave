@@ -71,6 +71,9 @@
 ```shell
 (venv) PS E:\Users\Administrator\PycharmProjects\VideoSave> .\venv\Scripts\pyinstaller.exe -w --name "VideoSave" --icon=icon.ico  --collect-datas=fake_useragent 
 -D app.py
+263 INFO: PyInstaller: 6.1.0
+263 INFO: Python: 3.11.0
+272 INFO: Platform: Windows-10-10.0.19045-SP0
 ......
 14405 INFO: Building COLLECT COLLECT-00.toc completed successfully.
 ```
