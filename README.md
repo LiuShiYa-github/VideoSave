@@ -69,7 +69,10 @@
 **Windows**
 
 ```shell
-必须在Windows机器上编译exe，暂时没有机器。
+(venv) PS E:\Users\Administrator\PycharmProjects\VideoSave> .\venv\Scripts\pyinstaller.exe -w --name "VideoSave" --icon=icon.ico  --collect-datas=fake_useragent 
+-D app.py
+......
+14405 INFO: Building COLLECT COLLECT-00.toc completed successfully.
 ```
 
 
