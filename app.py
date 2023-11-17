@@ -10,6 +10,7 @@ import pymysql
 from utils.index import Ui_Form as Index_Ui_Form
 from utils.form import Ui_Form as Home_Ui_Form
 from utils.Log import Ui_Form as Log_Ui_Form
+import utils.icon
 import os
 import time
 import requests
@@ -626,10 +627,10 @@ class Main(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    icon = QtGui.QIcon("./design/icon.png")
+    # icon = QtGui.QIcon("./design/icon.png")
     # pixmap = icon.pixmap(icon.availableSizes()[0])
     # resized_pixmap = pixmap.scaled(22, 50)
     # app.setWindowIcon(QtGui.QIcon(resized_pixmap))
-    app.setWindowIcon(icon)
+    app.setWindowIcon(QtGui.QIcon(':/icon.png'))
     window = Main()
     sys.exit(app.exec())
