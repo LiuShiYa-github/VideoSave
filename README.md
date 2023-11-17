@@ -33,6 +33,89 @@
 
 ![imageonline-co-gifimage](assets/imageonline-co-gifimage.gif)
 
+#### 打包构建
+
+```shell
+(venv) reqiqiu@reqiqiundiannao VideoSave % ./venv/bin/pyinstaller -w -D  --name "VideoSave" --icon=icon.ico  app.py
+119 INFO: PyInstaller: 6.1.0
+119 INFO: Python: 3.11.6
+126 INFO: Platform: macOS-13.0-arm64-arm-64bit
+127 INFO: wrote /Users/reqiqiu/代码/VideoSave/VideoSave.spec
+129 INFO: Extending PYTHONPATH with paths
+['/Users/reqiqiu/代码/VideoSave']
+187 INFO: checking Analysis
+187 INFO: Building Analysis because Analysis-00.toc is non existent
+187 INFO: Initializing module dependency graph...
+188 INFO: Caching module graph hooks...
+195 INFO: Analyzing base_library.zip ...
+603 INFO: Loading module hook 'hook-heapq.py' from '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/PyInstaller/hooks'...
+644 INFO: Loading module hook 'hook-encodings.py' from '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/PyInstaller/hooks'...
+1412 INFO: Loading module hook 'hook-pickle.py' from '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/PyInstaller/hooks'...
+2099 INFO: Caching module dependency graph...
+2133 INFO: Running Analysis Analysis-00.toc
+2133 INFO: Looking for Python shared library...
+2135 INFO: Using Python shared library: /opt/homebrew/Cellar/python@3.11/3.11.6/Frameworks/Python.framework/Versions/3.11/Python
+2135 INFO: Analyzing /Users/reqiqiu/代码/VideoSave/app.py
+2150 INFO: Loading module hook 'hook-PySide6.py' from '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/PyInstaller/hooks'...
+2774 INFO: Loading module hook 'hook-charset_normalizer.py' from '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/_pyinstaller_hooks_contrib/hookstdhooks'...
+2942 INFO: Loading module hook 'hook-certifi.py' from '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/_pyinstaller_hooks_contrib/hooks/stdhooks'...
+3048 INFO: Loading module hook 'hook-multiprocessing.util.py' from '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/PyInstaller/hooks'...
+3085 INFO: Loading module hook 'hook-xml.py' from '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/PyInstaller/hooks'...
+3281 INFO: Loading module hook 'hook-pkg_resources.py' from '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/PyInstaller/hooks'...
+3623 INFO: Loading module hook 'hook-platform.py' from '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/PyInstaller/hooks'...
+3653 INFO: Loading module hook 'hook-sysconfig.py' from '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/PyInstaller/hooks'...
+3686 INFO: Processing module hooks...
+3693 INFO: Processing pre-safe import module hook win32com from '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/_pyinstaller_hooks_contrib/hooks/e_safe_import_module/hook-win32com.py'.
+4055 INFO: Loading module hook 'hook-packaging.py' from '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/PyInstaller/hooks'...
+4112 INFO: Loading module hook 'hook-PySide6.QtWidgets.py' from '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/PyInstaller/hooks'...
+4187 INFO: Loading module hook 'hook-PySide6.QtCore.py' from '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/PyInstaller/hooks'...
+4296 INFO: Loading module hook 'hook-PySide6.QtGui.py' from '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/PyInstaller/hooks'...
+4367 INFO: Loading module hook 'hook-PySide6.QtDBus.py' from '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/PyInstaller/hooks'...
+4430 INFO: Loading module hook 'hook-PySide6.QtNetwork.py' from '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/PyInstaller/hooks'...
+4557 INFO: Looking for ctypes DLLs
+4574 INFO: Analyzing run-time hooks ...
+4576 INFO: Including run-time hook '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/PyInstaller/hooks/rthooks/pyi_rth_inspect.py'
+4577 INFO: Including run-time hook '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/PyInstaller/hooks/rthooks/pyi_rth_pkgutil.py'
+4578 INFO: Including run-time hook '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/PyInstaller/hooks/rthooks/pyi_rth_multiprocessing.py'
+4580 INFO: Including run-time hook '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/PyInstaller/hooks/rthooks/pyi_rth_pkgres.py'
+4582 INFO: Including run-time hook '/Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/PyInstaller/hooks/rthooks/pyi_rth_pyside6.py'
+4587 INFO: Looking for dynamic libraries
+4793 INFO: Warnings written to /Users/reqiqiu/代码/VideoSave/build/VideoSave/warn-VideoSave.txt
+4805 INFO: Graph cross-reference written to /Users/reqiqiu/代码/VideoSave/build/VideoSave/xref-VideoSave.html
+4816 INFO: checking PYZ
+4816 INFO: Building PYZ because PYZ-00.toc is non existent
+4816 INFO: Building PYZ (ZlibArchive) /Users/reqiqiu/代码/VideoSave/build/VideoSave/PYZ-00.pyz
+5141 INFO: Building PYZ (ZlibArchive) /Users/reqiqiu/代码/VideoSave/build/VideoSave/PYZ-00.pyz completed successfully.
+5145 INFO: EXE target arch: arm64
+5145 INFO: Code signing identity: None
+5146 INFO: checking PKG
+5146 INFO: Building PKG because PKG-00.toc is non existent
+5146 INFO: Building PKG (CArchive) VideoSave.pkg
+5162 INFO: Building PKG (CArchive) VideoSave.pkg completed successfully.
+5162 INFO: Bootloader /Users/reqiqiu/代码/VideoSave/venv/lib/python3.11/site-packages/PyInstaller/bootloader/Darwin-64bit/runw
+5162 INFO: checking EXE
+5163 INFO: Building EXE because EXE-00.toc is non existent
+5163 INFO: Building EXE from EXE-00.toc
+5163 INFO: Copying bootloader EXE to /Users/reqiqiu/代码/VideoSave/build/VideoSave/VideoSave
+5165 INFO: Converting EXE to target arch (arm64)
+5176 INFO: Removing signature(s) from EXE
+5186 INFO: Appending PKG archive to EXE
+5187 INFO: Fixing EXE headers for code signing
+5190 INFO: Re-signing the EXE
+5205 INFO: Building EXE from EXE-00.toc completed successfully.
+5207 INFO: checking COLLECT
+5207 INFO: Building COLLECT because COLLECT-00.toc is non existent
+5207 INFO: Building COLLECT COLLECT-00.toc
+6041 INFO: Building COLLECT COLLECT-00.toc completed successfully.
+6044 INFO: checking BUNDLE
+6045 INFO: Building BUNDLE because BUNDLE-00.toc is non existent
+6045 INFO: Building BUNDLE BUNDLE-00.toc
+7046 INFO: Signing the BUNDLE...
+7269 INFO: Building BUNDLE BUNDLE-00.toc completed successfully.
+(venv) reqiqiu@reqiqiundiannao VideoSave % ./venv/bin/pyinstaller -w -D  --name "VideoSave" --icon=icon.ico  app.py
+
+```
+
 #### 反馈问题
 
 请在下面两个Issue地址中二选一进行反馈，在反馈时请携带日志（程序安装路径下，名为VideoSave.log）
