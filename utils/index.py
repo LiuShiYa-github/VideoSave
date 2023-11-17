@@ -76,10 +76,10 @@ class Ui_Form(object):
 
         self.label_Gitee = QLabel(self.tab)
         self.label_Gitee.setObjectName(u"label_Gitee")
-        self.label_Gitee.setGeometry(QRect(110, 250, 41, 16))
+        self.label_Gitee.setGeometry(QRect(80, 230, 41, 16))
         self.label_GitHub = QLabel(self.tab)
         self.label_GitHub.setObjectName(u"label_GitHub")
-        self.label_GitHub.setGeometry(QRect(180, 250, 61, 16))
+        self.label_GitHub.setGeometry(QRect(150, 230, 61, 16))
         self.tabWidget.addTab(self.tab, "")
         self.tab_2 = QWidget()
         self.tab_2.setObjectName(u"tab_2")

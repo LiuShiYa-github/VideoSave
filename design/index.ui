@@ -143,8 +143,8 @@ selection-background-color: darkgray;
     <widget class="QLabel" name="label_Gitee">
      <property name="geometry">
       <rect>
-       <x>110</x>
-       <y>250</y>
+       <x>80</x>
+       <y>230</y>
        <width>41</width>
        <height>16</height>
       </rect>
@@ -156,8 +156,8 @@ selection-background-color: darkgray;
     <widget class="QLabel" name="label_GitHub">
      <property name="geometry">
       <rect>
-       <x>180</x>
-       <y>250</y>
+       <x>150</x>
+       <y>230</y>
        <width>61</width>
        <height>16</height>
       </rect>

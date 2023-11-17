@@ -1,5 +1,6 @@
 # This Python file uses the following encoding: utf-8
 import re
+import shutil
 import sys
 import multiprocessing_win
 import multiprocessing
@@ -25,6 +26,7 @@ logging.basicConfig(filename='{}/VideoSave.log'.format(os.path.split(os.path.rea
                     level=logging.INFO, filemode='w',
                     format='%(asctime)s - %(levelname)s - %(message)s', encoding='utf-8')
 # 当你想要clone代码本地尝试时，请记得修改数据库连接地址并导入数据，数据库内的电影数据请自行寻找资源。
+
 db = pymysql.connect(host='10.0.0.18', user='root', password='123456', database='video', charset='utf8')
 cursor = db.cursor()
 
@@ -277,7 +279,8 @@ class DownloadProgress(QThread):
                 continue
         # 清理存放目录
         if os.path.exists(path+'/'+video_name):
-            os.system('rm -rf {}/{}'.format(path, video_name))
+            shutil.rmtree(path+'/'+video_name)
+            # os.system('rm -rf {}/{}'.format(path, video_name))
 
     def informations(self, video_name, ts_count, error_num, start_time, end_time, path):
         """
