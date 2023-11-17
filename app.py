@@ -626,7 +626,7 @@ class Main(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    icon = QtGui.QIcon("icon.png")
+    icon = QtGui.QIcon("./design/icon.png")
     # pixmap = icon.pixmap(icon.availableSizes()[0])
     # resized_pixmap = pixmap.scaled(22, 50)
     # app.setWindowIcon(QtGui.QIcon(resized_pixmap))
