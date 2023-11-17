@@ -38,12 +38,6 @@ class Ui_Form(object):
         self.tabWidget.setIconSize(QSize(20, 20))
         self.tab = QWidget()
         self.tab.setObjectName(u"tab")
-        self.label_Gitee = QLabel(self.tab)
-        self.label_Gitee.setObjectName(u"label_Gitee")
-        self.label_Gitee.setGeometry(QRect(100, 210, 41, 16))
-        self.label_GitHub = QLabel(self.tab)
-        self.label_GitHub.setObjectName(u"label_GitHub")
-        self.label_GitHub.setGeometry(QRect(180, 210, 61, 16))
         self.login_username = QLineEdit(self.tab)
         self.login_username.setObjectName(u"login_username")
         self.login_username.setGeometry(QRect(30, 90, 257, 25))
@@ -135,6 +129,12 @@ class Ui_Form(object):
         self.pushButtonSubmit = QPushButton(Form)
         self.pushButtonSubmit.setObjectName(u"pushButtonSubmit")
         self.pushButtonSubmit.setGeometry(QRect(420, 420, 171, 41))
+        self.label_Gitee = QLabel(Form)
+        self.label_Gitee.setObjectName(u"label_Gitee")
+        self.label_Gitee.setGeometry(QRect(450, 490, 41, 16))
+        self.label_GitHub = QLabel(Form)
+        self.label_GitHub.setObjectName(u"label_GitHub")
+        self.label_GitHub.setGeometry(QRect(520, 490, 61, 16))
 
         self.retranslateUi(Form)
 
@@ -146,8 +146,6 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"\u767b\u5f55", None))
-        self.label_Gitee.setText(QCoreApplication.translate("Form", u"Gitee", None))
-        self.label_GitHub.setText(QCoreApplication.translate("Form", u"GitHub", None))
 #if QT_CONFIG(tooltip)
         self.login_username.setToolTip(QCoreApplication.translate("Form", u"<html><head/><body><p>\u8bf7\u8f93\u5165\u8d26\u6237\u540d</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -176,5 +174,7 @@ class Ui_Form(object):
         self.label.setText("")
         self.radioButton.setText(QCoreApplication.translate("Form", u"\u6211\u5df2\u540c\u610f\u4f7f\u7528\u8be5\u8f6f\u4ef6", None))
         self.pushButtonSubmit.setText(QCoreApplication.translate("Form", u"\u767b\u5f55", None))
+        self.label_Gitee.setText(QCoreApplication.translate("Form", u"Gitee", None))
+        self.label_GitHub.setText(QCoreApplication.translate("Form", u"GitHub", None))
     # retranslateUi
 
