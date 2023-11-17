@@ -5,7 +5,7 @@
 [![star](https://gitee.com/shiya_liu/VideoSave/badge/star.svg?theme=white)](https://gitee.com/shiya_liu/VideoSave/stargazers)
 [![fork](https://gitee.com/shiya_liu/VideoSave/badge/fork.svg?theme=white)](https://gitee.com/shiya_liu/VideoSave/members)
 
-![Snipaste_2023-11-17_11-25-49](assets/Snipaste_2023-11-17_11-25-49.png) [![shiya.liu/VideoSave](https://gitee.com/shiya_liu/VideoSave/widgets/widget_card.svg?colors=4183c4,ffffff,ffffff,e3e9ed,666666,9b9b9b)](https://gitee.com/shiya_liu/VideoSave)
+![Snipaste_2023-11-17_11-25-49](assets/Snipaste_2023-11-17_11-25-49.png)
 
 #### 需求背景
 
@@ -26,7 +26,7 @@
 - 喜欢电影但独自在外拼搏，无心去影院吃狗粮 🫂
 - 喜欢电影但处于奋斗阶段，需要“把钱花在刀刃上”💪
 
-#### 程序下载
+#### 下载地址
 
 
 
@@ -46,6 +46,8 @@
 
 #### 免责声明
 VideoSave所有内容均来自互联网分享站点所提供的公开引用资源，该软件以及视频资源仅作为阅读交流使用，并无任何商业目的，其版权归作者或出版社所有，本软件不对所涉及的版权问题负法律责任。
+
+
 
 
 
