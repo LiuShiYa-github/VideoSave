@@ -19,6 +19,14 @@
 - 每周上新,保证影片更新时间(等等党的福利) 🎦
 - 本地保存反复观看 🌹
 
+#### 条件限制
+
+必须要注册登录
+
+只能一部一部的下载
+
+
+
 #### 适用人群
 
 - 喜欢电影但休闲时间网络条件差，网络良好时条件不允许在线观看 💦
@@ -35,8 +43,10 @@
 
 #### 打包构建
 
+**Mac**
+
 ```shell
-(venv) reqiqiu@reqiqiundiannao VideoSave % ./venv/bin/pyinstaller -w -D  --name "VideoSave" --icon=icon.ico  app.py
+(venv) reqiqiu@reqiqiundiannao VideoSave % ./venv/bin/pyinstaller -w -D  --name "VideoSave" --icon=icon.ico  --collect-datas=fake_useragent  app.py 
 119 INFO: PyInstaller: 6.1.0
 119 INFO: Python: 3.11.6
 126 INFO: Platform: macOS-13.0-arm64-arm-64bit
@@ -112,17 +122,25 @@
 6045 INFO: Building BUNDLE BUNDLE-00.toc
 7046 INFO: Signing the BUNDLE...
 7269 INFO: Building BUNDLE BUNDLE-00.toc completed successfully.
-(venv) reqiqiu@reqiqiundiannao VideoSave % ./venv/bin/pyinstaller -w -D  --name "VideoSave" --icon=icon.ico  app.py
 
 ```
+
+参数`--collect-datas=fake_useragent`源于 https://github.com/fake-useragent/fake-useragent/issues/155
+
+**Windows**
+
+```shell
+```
+
+
 
 #### 反馈问题
 
 请在下面两个Issue地址中二选一进行反馈，在反馈时请携带日志（程序安装路径下，名为VideoSave.log）
 
-[Gitee Issue](https://gitee.com/shiya_liu/VideoSave/issues)
+- [Gitee Issue](https://gitee.com/shiya_liu/VideoSave/issues)
 
-[GitHub Issue](https://github.com/LiuShiYa-github/VideoSave/issues)
+- [GitHub Issue](https://github.com/LiuShiYa-github/VideoSave/issues)
 
 
 
