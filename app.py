@@ -1,10 +1,10 @@
 # This Python file uses the following encoding: utf-8
 import re
 import sys
-# import multiprocessing_win
+import multiprocessing_win
 import multiprocessing
-from PySide6 import QtGui
-from PySide6.QtGui import QImage, QPixmap
+from PySide6 import QtGui, QtCore
+from PySide6.QtGui import QImage, QPixmap, Qt, QGuiApplication
 from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox, QWidget, QStackedWidget, QFileDialog
 from PySide6.QtCore import (QThread, Slot, Signal, QSize)
 import pymysql
@@ -330,6 +330,8 @@ class DownloadProgress(QThread):
             # print(self.download_path)
             self.mkdir(video_name=video_name, path=self.download_path)
             ts_count, ts_list = self.get_m3u8(url=video_url)
+            if type(video_url) == bytes:
+                video_url = video_url.decode('utf-8')
             base_url = video_url.replace(video_url.split('/')[-1], '')
             url_list = self.piecing_download_addr(ts_list=ts_list, base_url=base_url)
             fail_list = []
@@ -611,7 +613,7 @@ class Main(QMainWindow):
 
     def logshow(self):
         self.stack.setCurrentIndex(2)
-        with open('{}/VideoSave.log'.format(os.path.split(os.path.realpath(__file__))[0]), 'r') as f:
+        with open('{}/VideoSave.log'.format(os.path.split(os.path.realpath(__file__))[0]), 'r', encoding='utf-8') as f:
             logcontent = f.read()
         self.log_page.log.textEdit.setText(logcontent)
 
@@ -628,6 +630,7 @@ class Main(QMainWindow):
 
 if __name__ == "__main__":
     multiprocessing.freeze_support()
+    # QGuiApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.Ceil)
     """
     参考：Pyinstaller 多进程代码打包 出现多个进程解决方案
     https://github.com/pyinstaller/pyinstaller/wiki/Recipe-Multiprocessing
