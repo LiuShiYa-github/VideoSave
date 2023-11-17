@@ -41,7 +41,13 @@
 
 ![imageonline-co-gifimage](assets/imageonline-co-gifimage.gif)
 
-#### 打包构建
+#### 本地构建
+
+> ```python
+> # 当你想要clone代码本地尝试时，请记得修改数据库连接地址并导入数据，数据库内的电影数据请自行寻找资源。
+> db = pymysql.connect(host='10.0.0.18', user='root', password='123456', database='video', charset='utf8')
+> cursor = db.cursor()
+> ```
 
 **Mac**
 
