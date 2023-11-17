@@ -1,7 +1,8 @@
 # This Python file uses the following encoding: utf-8
 import re
 import sys
-
+# import multiprocessing_win
+import multiprocessing
 from PySide6 import QtGui
 from PySide6.QtGui import QImage, QPixmap
 from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox, QWidget, QStackedWidget, QFileDialog
@@ -23,7 +24,7 @@ from concurrent.futures import ThreadPoolExecutor, wait, ALL_COMPLETED
 logging.basicConfig(filename='{}/VideoSave.log'.format(os.path.split(os.path.realpath(__file__))[0]),
                     level=logging.INFO, filemode='w',
                     format='%(asctime)s - %(levelname)s - %(message)s', encoding='utf-8')
-
+# 当你想要clone代码本地尝试时，请记得修改数据库连接地址并导入数据，数据库内的电影数据请自行寻找资源。
 db = pymysql.connect(host='10.0.0.18', user='root', password='123456', database='video', charset='utf8')
 cursor = db.cursor()
 
@@ -626,6 +627,12 @@ class Main(QMainWindow):
 
 
 if __name__ == "__main__":
+    multiprocessing.freeze_support()
+    """
+    参考：Pyinstaller 多进程代码打包 出现多个进程解决方案
+    https://github.com/pyinstaller/pyinstaller/wiki/Recipe-Multiprocessing
+    https://blog.csdn.net/wm9028/article/details/101208869
+    """
     app = QApplication(sys.argv)
     # icon = QtGui.QIcon("./design/icon.png")
     # pixmap = icon.pixmap(icon.availableSizes()[0])
