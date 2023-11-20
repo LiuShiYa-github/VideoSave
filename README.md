@@ -37,17 +37,22 @@
 - 只能一部一部的下载 🐱
 - 下载过程中关闭程序可能会导致崩溃(下载未开始或已经下载完毕不会出现此情况) 🐭
 - 点击后无反应时请耐心等待，短时间内连续多次点击可能导致崩溃(网络带宽限制导致) 🐍
-- 搜索电影只会反馈名称，没有图像以求减少非必要的请求压力 🐲 
+- ~~搜索电影只会反馈名称，没有图像以求减少非必要的请求压力~~  (已经取消此限制) 🐲
 
 # 安装使用
 
+#### 体验版地址(推荐)
+
+- [MacOS](https://gitee.com/shiya_liu/VideoSave/releases/download/v0.1/VideoSave_macos.zip)
+- [Windows](https://gitee.com/shiya_liu/VideoSave/releases/download/v0.1/VideoSave_windows.zip)
 
 
-#### 下载地址
 
-- [MacOS](https://gitee.com/shiya_liu/VideoSave/releases/download/v1.0/VideoSave_macos.zip)
-- [Windows](https://gitee.com/shiya_liu/VideoSave/releases/download/v1.0/VideoSave_windows.zip)
-- [Source code](https://gitee.com/shiya_liu/VideoSave/archive/refs/tags/v1.0.tar.gz)
+#### ~~下载地址~~
+
+- ~~[MacOS](https://gitee.com/shiya_liu/VideoSave/releases/download/v1.0/VideoSave_macos.zip)~~
+- ~~[Windows](https://gitee.com/shiya_liu/VideoSave/releases/download/v1.0/VideoSave_windows.zip)~~
+- ~~[Source code](https://gitee.com/shiya_liu/VideoSave/archive/refs/tags/v1.0.tar.gz)~~
 
 #### 安装过程
 
