@@ -21,14 +21,16 @@ import glob
 from fake_useragent import UserAgent
 import logging
 from concurrent.futures import ThreadPoolExecutor, wait, ALL_COMPLETED
+import pymongo
 
 logging.basicConfig(filename='{}/VideoSave.log'.format(os.path.split(os.path.realpath(__file__))[0]),
                     level=logging.INFO, filemode='w',
                     format='%(asctime)s - %(levelname)s - %(message)s', encoding='utf-8')
 # 当你想要clone代码本地尝试时，请记得修改数据库连接地址并导入数据，数据库内的电影数据请自行寻找资源。
-
-db = pymysql.connect(host='10.0.0.18', user='root', password='123456', database='video', charset='utf8')
-cursor = db.cursor()
+conn = pymongo.MongoClient('mongodb://public:Pub123.lic@10.0.0.18:27017/?authSource=video')
+db = conn['video']
+videoset = db['video']
+userset = db['user']
 
 
 class Login(QWidget):
@@ -55,17 +57,15 @@ class Login(QWidget):
             # 登录页
             login_username = self.index.login_username.text().strip()
             login_password = self.index.login_password.text().strip()
-            # 查询MySQL用户名或密码
-            sel = 'SELECT * FROM user WHERE user_name=%s'
-            cursor.execute(sel, login_username)
-            result = cursor.fetchall()
+            # 查询mongo用户名或密码
+            result = userset.find_one({"user_name":"admin"})
 
             # 用户没有输入账户密码
             if not login_username or not login_password:
                 QMessageBox.warning(self, "错误", "登录页面用户名或密码不能为空")
                 return False
             # 用户输入用户名密码 但是用户不存在
-            elif not result:
+            elif result == None:
                 # 用户不存在
                 QMessageBox.warning(self, "错误", "用户不存在")
                 self.index.login_username.clear()
@@ -73,7 +73,7 @@ class Login(QWidget):
                 return False
             else:
                 # 获取用户密码
-                mysql_password = result[0][1]
+                mysql_password = result['password']
                 # 密码不正确
                 if login_password == mysql_password:
                     # 切换到主页
@@ -99,10 +99,9 @@ class Login(QWidget):
                 self.index.register_password.clear()
                 self.index.register_password_2.clear()
                 return False
-                # 查询MySQL用户名或密码
-            sel = 'SELECT * FROM user WHERE user_name=%s'
-            cursor.execute(sel, register_username)
-            result = cursor.fetchall()
+
+            # 查询MySQL用户名或密码
+            result = userset.find_one({"user_name": register_username})
             # 用户名密码不可以为空
             if not register_username or not register_password or not register_password_2:
                 QMessageBox.warning(self, "错误", "注册页面用户名或密码不能为空")
@@ -118,7 +117,7 @@ class Login(QWidget):
                 self.index.register_password_2.clear()
                 return False
             # 用户是否已经存在
-            if result:
+            if result != None:
                 # 用户已经存在
                 QMessageBox.warning(self, "错误", "用户已经存在，请勿重复注册")
                 self.index.register_username.clear()
@@ -126,10 +125,9 @@ class Login(QWidget):
                 self.index.register_password_2.clear()
                 return False
             else:
-                sel = 'insert into user values(%s, %s)'
-                user_info = [register_username, register_password]
-                cursor.execute(sel, user_info)
-                db.commit()
+                # 注册
+                info = {"user_name": register_username, "password": register_password}
+                userset.insert_one(info)
                 QMessageBox.information(self, "正确", "注册成功")
                 self.index.register_username.clear()
                 self.index.register_password.clear()
@@ -152,52 +150,29 @@ class ShowFilmImage(QThread):
 
     def run(self):
         if self.search_str == "":
-            sel = 'SELECT film_name,film_image_url  FROM video limit {},10;'.format((self.page_num - 1) * 10)
-            try:
-                cursor.execute(sel)
-                result = cursor.fetchall()
-                res_list = []
-                film_list = []
-                if len(result) > 10:
-                    for num in range(0, 10):
-                        res_list.append(result[num][1])
-                        film_list.append(result[num][0])
-                    self.image.emit(res_list)
-                    self.film.emit(film_list)
-                else:
-                    for num in range(0, len(result)):
-                        res_list.append(result[num][1])
-                        film_list.append(result[num][0])
-                    self.image.emit(res_list)
-                    self.film.emit(film_list)
-            except Exception as e:
-                logging.error(e)
+            result = videoset.find().skip((self.page_num - 1) * 10).limit(10)
+            res_list = []
+            film_list = []
+            for doc in result:
+                res_list.append(doc['film_image_url'])
+                film_list.append(doc['film_name'])
+            self.image.emit(res_list)
+            self.film.emit(film_list)
         else:
-            sel = "select film_name from video.video where film_name like '%{}%';".format(
-                self.search_str)
-            try:
-                cursor.execute(sel)
-                result = cursor.fetchall()
-                res_list = []
-                film_list = []
-                if len(result) > 10:
-                    for num in range(0, 10):
-                        res = num.to_bytes(length=4, byteorder='little', signed=False)
-                        res_list.append(res)
-                        film_list.append(result[num][0])
-                    self.image.emit(res_list)
-                    self.film.emit(film_list)
+            res = videoset.find({"film_name": {"$regex": self.search_str}})
+            res_list = []
+            film_list = []
+            num = 0
+            for doc in res:
+                if num > 10:
+                    break
                 else:
-                    for num in range(0, len(result)):
-                        res = num.to_bytes(length=4, byteorder='little', signed=False)
-                        res_list.append(res)
-                        film_list.append(result[num][0])
-                    self.image.emit(res_list)
-                    self.film.emit(film_list)
-            except Exception as e:
-                logging.error(e)
+                    num += 1
+                    res_list.append(doc['film_image_url'])
+                    film_list.append(doc['film_name'])
 
-
+            self.image.emit(res_list)
+            self.film.emit(film_list)
 
 class DownloadProgress(QThread):
     progress = Signal(int, int)
@@ -356,13 +331,14 @@ class DownloadProgress(QThread):
         """
         程序入口函数
         """
-        sel = 'select film_name, film_url from video where film_name  like "%{}%" order by film_name asc'.format(
-            self.film_name)
-        cursor.execute(sel)
-        result = cursor.fetchall()
-        for video_name in result:
-            video_url = video_name[1]
-            video_name = video_name[0]
+        res = videoset.find({"film_name": {"$regex": self.film_name}})
+        for doc in res:
+            video_name = doc['film_name']
+            video_url = doc['film_url']
+            start_time = time.time()
+        # for video_name in result:
+        #     video_url = video_name[1]
+        #     video_name = video_name[0]
             start_time = time.time()
             # print(self.download_path)
             self.mkdir(video_name=video_name, path=self.download_path)
@@ -433,51 +409,50 @@ class Home(QWidget):
         self.home.toolButtonDownload.clicked.connect(self.download)
 
     def down_pushButton(self):
-            self.num += 1
-            self.page = 10
-            # 更新当前页码
-            self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 1, str(self.pageCount)))
-            self.home.lineEdit_showpage.setReadOnly(True)
-            self.home.pushButton_1.setText(str(self.num * 10 + 1))
-            self.home.pushButton_2.setText(str(self.num * 10 + 2))
-            self.home.pushButton_3.setText(str(self.num * 10 + 3))
-            self.home.pushButton_4.setText(str(self.num * 10 + 4))
-            self.home.pushButton_5.setText(str(self.num * 10 + 5))
-            self.home.pushButton_6.setText(str(self.num * 10 + 6))
-            self.home.pushButton_7.setText(str(self.num * 10 + 7))
-            self.home.pushButton_8.setText(str(self.num * 10 + 8))
-            self.home.pushButton_9.setText(str(self.num * 10 + 9))
-            self.home.pushButton_10.setText(str(self.num * 10 + 10))
-            self.ShowFilmImage = ShowFilmImage(page=self.page * self.num + 1, search_str=self.search)
-            self.ShowFilmImage.image.connect(self.showimage)
-            self.ShowFilmImage.film.connect(self.showname)
-            self.ShowFilmImage.start()
-            if self.num >= 1:
-                self.home.pushButton_page_2.show()
+        self.num += 1
+        self.page = 10
+        # 更新当前页码
+        self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 1, str(self.pageCount)))
+        self.home.lineEdit_showpage.setReadOnly(True)
+        self.home.pushButton_1.setText(str(self.num * 10 + 1))
+        self.home.pushButton_2.setText(str(self.num * 10 + 2))
+        self.home.pushButton_3.setText(str(self.num * 10 + 3))
+        self.home.pushButton_4.setText(str(self.num * 10 + 4))
+        self.home.pushButton_5.setText(str(self.num * 10 + 5))
+        self.home.pushButton_6.setText(str(self.num * 10 + 6))
+        self.home.pushButton_7.setText(str(self.num * 10 + 7))
+        self.home.pushButton_8.setText(str(self.num * 10 + 8))
+        self.home.pushButton_9.setText(str(self.num * 10 + 9))
+        self.home.pushButton_10.setText(str(self.num * 10 + 10))
+        self.ShowFilmImage = ShowFilmImage(page=self.page * self.num + 1, search_str=self.search)
+        self.ShowFilmImage.image.connect(self.showimage)
+        self.ShowFilmImage.film.connect(self.showname)
+        self.ShowFilmImage.start()
+        if self.num >= 1:
+            self.home.pushButton_page_2.show()
 
     def up_pushButton(self):
-            self.num -= 1
-            self.page = 10
-            # 更新当前页码
-            self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 1, str(self.pageCount)))
-            self.home.lineEdit_showpage.setReadOnly(True)
-            self.home.pushButton_1.setText(str(self.num * 10 + 1))
-            self.home.pushButton_2.setText(str(self.num * 10 + 2))
-            self.home.pushButton_3.setText(str(self.num * 10 + 3))
-            self.home.pushButton_4.setText(str(self.num * 10 + 4))
-            self.home.pushButton_5.setText(str(self.num * 10 + 5))
-            self.home.pushButton_6.setText(str(self.num * 10 + 6))
-            self.home.pushButton_7.setText(str(self.num * 10 + 7))
-            self.home.pushButton_8.setText(str(self.num * 10 + 8))
-            self.home.pushButton_9.setText(str(self.num * 10 + 9))
-            self.home.pushButton_10.setText(str(self.num * 10 + 10))
-            self.ShowFilmImage = ShowFilmImage(page=self.page * self.num +1, search_str=self.search)
-            self.ShowFilmImage.image.connect(self.showimage)
-            self.ShowFilmImage.film.connect(self.showname)
-            self.ShowFilmImage.start()
-            if self.num <= 0:
-                self.home.pushButton_page_2.hide()
-
+        self.num -= 1
+        self.page = 10
+        # 更新当前页码
+        self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 1, str(self.pageCount)))
+        self.home.lineEdit_showpage.setReadOnly(True)
+        self.home.pushButton_1.setText(str(self.num * 10 + 1))
+        self.home.pushButton_2.setText(str(self.num * 10 + 2))
+        self.home.pushButton_3.setText(str(self.num * 10 + 3))
+        self.home.pushButton_4.setText(str(self.num * 10 + 4))
+        self.home.pushButton_5.setText(str(self.num * 10 + 5))
+        self.home.pushButton_6.setText(str(self.num * 10 + 6))
+        self.home.pushButton_7.setText(str(self.num * 10 + 7))
+        self.home.pushButton_8.setText(str(self.num * 10 + 8))
+        self.home.pushButton_9.setText(str(self.num * 10 + 9))
+        self.home.pushButton_10.setText(str(self.num * 10 + 10))
+        self.ShowFilmImage = ShowFilmImage(page=self.page * self.num + 1, search_str=self.search)
+        self.ShowFilmImage.image.connect(self.showimage)
+        self.ShowFilmImage.film.connect(self.showname)
+        self.ShowFilmImage.start()
+        if self.num <= 0:
+            self.home.pushButton_page_2.hide()
 
     def download(self):
         # 判断是否已经设置了下载路径
@@ -586,6 +561,7 @@ class Home(QWidget):
         # 更新当前页码
         self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 3, str(self.pageCount)))
         self.home.lineEdit_showpage.setReadOnly(True)
+
     def switchpage_4(self):
         self.ShowFilmImage = ShowFilmImage(page=self.page * self.num + 4, search_str=self.search)
         self.ShowFilmImage.image.connect(self.showimage)
@@ -594,6 +570,7 @@ class Home(QWidget):
         # 更新当前页码
         self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 4, str(self.pageCount)))
         self.home.lineEdit_showpage.setReadOnly(True)
+
     def switchpage_5(self):
         self.ShowFilmImage = ShowFilmImage(page=self.page * self.num + 5, search_str=self.search)
         self.ShowFilmImage.image.connect(self.showimage)
@@ -602,6 +579,7 @@ class Home(QWidget):
         # 更新当前页码
         self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 5, str(self.pageCount)))
         self.home.lineEdit_showpage.setReadOnly(True)
+
     def switchpage_6(self):
         self.ShowFilmImage = ShowFilmImage(page=self.page * self.num + 6, search_str=self.search)
         self.ShowFilmImage.image.connect(self.showimage)
@@ -619,6 +597,7 @@ class Home(QWidget):
         # 更新当前页码
         self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 7, str(self.pageCount)))
         self.home.lineEdit_showpage.setReadOnly(True)
+
     def switchpage_8(self):
         self.ShowFilmImage = ShowFilmImage(page=self.page * self.num + 8, search_str=self.search)
         self.ShowFilmImage.image.connect(self.showimage)
@@ -627,6 +606,7 @@ class Home(QWidget):
         # 更新当前页码
         self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 8, str(self.pageCount)))
         self.home.lineEdit_showpage.setReadOnly(True)
+
     def switchpage_9(self):
         self.ShowFilmImage = ShowFilmImage(page=self.page * self.num + 1, search_str=self.search)
         self.ShowFilmImage.image.connect(self.showimage)
@@ -635,6 +615,7 @@ class Home(QWidget):
         # 更新当前页码
         self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 9, str(self.pageCount)))
         self.home.lineEdit_showpage.setReadOnly(True)
+
     def switchpage_10(self):
         self.ShowFilmImage = ShowFilmImage(page=self.page * self.num + 10, search_str=self.search)
         self.ShowFilmImage.image.connect(self.showimage)
@@ -643,16 +624,15 @@ class Home(QWidget):
         # 更新当前页码
         self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 10, str(self.pageCount)))
         self.home.lineEdit_showpage.setReadOnly(True)
+
     @Slot()
     def fun(self):
         # 获取总页码
-        sel = 'select count(film_name) from video;'
-        cursor.execute(sel)
-        result = cursor.fetchall()
-        if result[0][0] % 10 == 0:
-            pageCount = result[0][0] // 10
+        result = videoset.count_documents({})
+        if result % 10 == 0:
+            pageCount = result // 10
         else:
-            pageCount = result[0][0] // 10 + 1
+            pageCount = result // 10 + 1
         self.pageCount = pageCount
         self.home.lineEdit_showpage.setText("{}/{}页".format(1, pageCount))
         self.home.lineEdit_showpage.setReadOnly(True)
