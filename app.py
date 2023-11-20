@@ -28,6 +28,7 @@ logging.basicConfig(filename='{}/VideoSave.log'.format(os.path.split(os.path.rea
                     format='%(asctime)s - %(levelname)s - %(message)s', encoding='utf-8')
 # 当你想要clone代码本地尝试时，请记得修改数据库连接地址并导入数据，数据库内的电影数据请自行寻找资源。
 conn = pymongo.MongoClient('mongodb://public:Pub123.lic@10.0.0.18:27017/?authSource=video')
+# conn = pymongo.MongoClient('mongodb://public:Pub123.lic@117.72.34.66:27017/?authSource=video')
 db = conn['video']
 videoset = db['video']
 userset = db['user']
@@ -58,7 +59,7 @@ class Login(QWidget):
             login_username = self.index.login_username.text().strip()
             login_password = self.index.login_password.text().strip()
             # 查询mongo用户名或密码
-            result = userset.find_one({"user_name":"admin"})
+            result = userset.find_one({"user_name":login_username})
 
             # 用户没有输入账户密码
             if not login_username or not login_password:
