@@ -41,6 +41,8 @@
 
 # 安装使用
 
+> 体验版增强了查询效率，大大提高了翻页以及搜索时的效率，但由于长期使用其服务是收费的，所以无法长期使用，正在积极寻找合适的SaaS资源。
+
 #### 体验版地址(推荐)
 
 - [MacOS](https://gitee.com/shiya_liu/VideoSave/releases/download/v0.1/VideoSave_macos.zip)
@@ -82,23 +84,21 @@
 
 1、解压安装包
 
-![c7a0b6d949440833f2368d2cd14f9b28](assets/c7a0b6d949440833f2368d2cd14f9b28.png)
+![933ae8e4b8326dd683aa20a2bb44ec05_720](assets/933ae8e4b8326dd683aa20a2bb44ec05_720.jpg)
 
-![d564c94b3f4846a1652cb20971534034](assets/d564c94b3f4846a1652cb20971534034.png)
+![8bfc0265748c76b31f103e62543800d5](assets/8bfc0265748c76b31f103e62543800d5.jpg)
 
-![187770a312431f4e897b9b03da94336a](assets/187770a312431f4e897b9b03da94336a.png)
+![1fd43024a2706f2a968d4a9db4eae9eb](assets/1fd43024a2706f2a968d4a9db4eae9eb.jpg)
 
-2、找到程序文件
+![bc5009611266bb0b6fa40b3ddc4489c1](assets/bc5009611266bb0b6fa40b3ddc4489c1.jpg)
 
-![2d2d38fa97821e536c226350c4395008](assets/2d2d38fa97821e536c226350c4395008.png)
+2、找到程序文件并创建快捷方式
 
-3、创建快捷方式
+![36bca136bb875e60ca79528fd93599a9_720](assets/36bca136bb875e60ca79528fd93599a9_720.jpg)
 
-![e9b9acb268968bd0af93afb3b35f4734](assets/e9b9acb268968bd0af93afb3b35f4734.jpg)
+3、点击运行
 
-4、点击运行
-
-![3d1bb7c441c908ceab507ced55c437d8](assets/3d1bb7c441c908ceab507ced55c437d8.jpg)
+![22e151c765d872df27512287d3332e48](assets/22e151c765d872df27512287d3332e48.jpg)
 
 ![bcb8157db295a8c714510634dc91d3c7](assets/bcb8157db295a8c714510634dc91d3c7.jpg)
 
