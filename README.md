@@ -142,7 +142,7 @@
 14405 INFO: Building COLLECT COLLECT-00.toc completed successfully.
 ```
 
-# 问题反馈
+# 反馈渠道
 
 #### 想法或建议
 
