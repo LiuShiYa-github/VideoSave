@@ -27,8 +27,8 @@ logging.basicConfig(filename='{}/VideoSave.log'.format(os.path.split(os.path.rea
                     level=logging.INFO, filemode='w',
                     format='%(asctime)s - %(levelname)s - %(message)s', encoding='utf-8')
 # 当你想要clone代码本地尝试时，请记得修改数据库连接地址并导入数据，数据库内的电影数据请自行寻找资源。
-conn = pymongo.MongoClient('mongodb://public:Pub123.lic@10.0.0.18:27017/?authSource=video')
-# conn = pymongo.MongoClient('mongodb://public:Pub123.lic@117.72.34.66:27017/?authSource=video')
+# conn = pymongo.MongoClient('mongodb://public:Pub123.lic@10.0.0.18:27017/?authSource=video')
+conn = pymongo.MongoClient('mongodb://public:Pub123.lic@117.72.34.66:27017/?authSource=video')
 db = conn['video']
 videoset = db['video']
 userset = db['user']
@@ -59,7 +59,7 @@ class Login(QWidget):
             login_username = self.index.login_username.text().strip()
             login_password = self.index.login_password.text().strip()
             # 查询mongo用户名或密码
-            result = userset.find_one({"user_name":login_username})
+            result = userset.find_one({"user_name": login_username})
 
             # 用户没有输入账户密码
             if not login_username or not login_password:
@@ -92,14 +92,14 @@ class Login(QWidget):
             register_password = self.index.register_password.text().strip()
             register_password_2 = self.index.register_password_2.text().strip()
             # 校验用户输入的手机号
-            ret = re.match(r"^1[35678]\d{9}$", register_username)
+            # ret = re.match(r"^1[35678]\d{9}$", register_username)
 
-            if not ret:
-                QMessageBox.warning(self, "错误", "请输入正确的手机号")
-                self.index.register_username.clear()
-                self.index.register_password.clear()
-                self.index.register_password_2.clear()
-                return False
+            # if not ret:
+            #     QMessageBox.warning(self, "错误", "请输入正确的手机号")
+            #     self.index.register_username.clear()
+            #     self.index.register_password.clear()
+            #     self.index.register_password_2.clear()
+            #     return False
 
             # 查询MySQL用户名或密码
             result = userset.find_one({"user_name": register_username})
@@ -174,6 +174,7 @@ class ShowFilmImage(QThread):
 
             self.image.emit(res_list)
             self.film.emit(film_list)
+
 
 class DownloadProgress(QThread):
     progress = Signal(int, int)
@@ -337,9 +338,9 @@ class DownloadProgress(QThread):
             video_name = doc['film_name']
             video_url = doc['film_url']
             start_time = time.time()
-        # for video_name in result:
-        #     video_url = video_name[1]
-        #     video_name = video_name[0]
+            # for video_name in result:
+            #     video_url = video_name[1]
+            #     video_name = video_name[0]
             start_time = time.time()
             # print(self.download_path)
             self.mkdir(video_name=video_name, path=self.download_path)
@@ -413,7 +414,8 @@ class Home(QWidget):
         self.num += 1
         self.page = 10
         # 更新当前页码
-        self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 1, str(self.pageCount)))
+        # self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 1, str(self.pageCount)))
+        self.home.lineEdit_showpage.setText("{}页".format(self.page * self.num + 1))
         self.home.lineEdit_showpage.setReadOnly(True)
         self.home.pushButton_1.setText(str(self.num * 10 + 1))
         self.home.pushButton_2.setText(str(self.num * 10 + 2))
@@ -436,7 +438,8 @@ class Home(QWidget):
         self.num -= 1
         self.page = 10
         # 更新当前页码
-        self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 1, str(self.pageCount)))
+        # self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 1, str(self.pageCount)))
+        self.home.lineEdit_showpage.setText("{}页".format(self.page * self.num + 1))
         self.home.lineEdit_showpage.setReadOnly(True)
         self.home.pushButton_1.setText(str(self.num * 10 + 1))
         self.home.pushButton_2.setText(str(self.num * 10 + 2))
@@ -525,16 +528,35 @@ class Home(QWidget):
         self.path = film_path
 
     def search_fun(self):
-        page_num = 1
         search = self.home.lineEdit.text().strip()
-        self.home.lineEdit.clear()
+
         if search == "":
             QMessageBox.warning(self, "错误", "请输入搜索名称")
         else:
-            self.ShowFilmImage = ShowFilmImage(page=page_num, search_str=search)
-            self.ShowFilmImage.image.connect(self.showimage)
-            self.ShowFilmImage.film.connect(self.showname)
-            self.ShowFilmImage.start()
+            res = videoset.find({"film_name": {"$regex": search}})
+            res_list = []
+            film_list = []
+            num = 0
+            for doc in res:
+                if num > 10:
+                    break
+                else:
+                    num += 1
+                    # 进行展示
+                    res_list.append(doc['film_image_url'])
+                    film_list.append(doc['film_name'])
+            if num == 0:
+                QMessageBox.warning(self, "错误", "没有找到该资源")
+                self.home.lineEdit.clear()
+            else:
+                self.showimage(res_list)
+                self.showname(film_list)
+                self.home.lineEdit.clear()
+            #
+            # self.ShowFilmImage = ShowFilmImage(page=page_num, search_str=search)
+            # self.ShowFilmImage.image.connect(self.showimage)
+            # self.ShowFilmImage.film.connect(self.showname)
+            # self.ShowFilmImage.start()
 
     def switchpage_1(self):
         self.ShowFilmImage = ShowFilmImage(page=self.page * self.num + 1, search_str=self.search)
@@ -542,7 +564,8 @@ class Home(QWidget):
         self.ShowFilmImage.film.connect(self.showname)
         self.ShowFilmImage.start()
         # 更新当前页码
-        self.home.lineEdit_showpage.setText("{}/{}页".format(str(self.page * self.num + 1), str(self.pageCount)))
+        # self.home.lineEdit_showpage.setText("{}/{}页".format(str(self.page * self.num + 1), str(self.pageCount)))
+        self.home.lineEdit_showpage.setText("{}页".format(str(self.page * self.num + 1)))
         self.home.lineEdit_showpage.setReadOnly(True)
 
     def switchpage_2(self):
@@ -551,7 +574,8 @@ class Home(QWidget):
         self.ShowFilmImage.film.connect(self.showname)
         self.ShowFilmImage.start()
         # 更新当前页码
-        self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 2, str(self.pageCount)))
+        # self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 2, str(self.pageCount)))
+        self.home.lineEdit_showpage.setText("{}页".format(self.page * self.num + 2))
         self.home.lineEdit_showpage.setReadOnly(True)
 
     def switchpage_3(self):
@@ -560,7 +584,8 @@ class Home(QWidget):
         self.ShowFilmImage.film.connect(self.showname)
         self.ShowFilmImage.start()
         # 更新当前页码
-        self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 3, str(self.pageCount)))
+        # self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 3, str(self.pageCount)))
+        self.home.lineEdit_showpage.setText("{}页".format(self.page * self.num + 3))
         self.home.lineEdit_showpage.setReadOnly(True)
 
     def switchpage_4(self):
@@ -569,7 +594,8 @@ class Home(QWidget):
         self.ShowFilmImage.film.connect(self.showname)
         self.ShowFilmImage.start()
         # 更新当前页码
-        self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 4, str(self.pageCount)))
+        # self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 4, str(self.pageCount)))
+        self.home.lineEdit_showpage.setText("{}页".format(self.page * self.num + 4))
         self.home.lineEdit_showpage.setReadOnly(True)
 
     def switchpage_5(self):
@@ -578,7 +604,8 @@ class Home(QWidget):
         self.ShowFilmImage.film.connect(self.showname)
         self.ShowFilmImage.start()
         # 更新当前页码
-        self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 5, str(self.pageCount)))
+        # self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 5, str(self.pageCount)))
+        self.home.lineEdit_showpage.setText("{}页".format(self.page * self.num + 5))
         self.home.lineEdit_showpage.setReadOnly(True)
 
     def switchpage_6(self):
@@ -587,7 +614,7 @@ class Home(QWidget):
         self.ShowFilmImage.film.connect(self.showname)
         self.ShowFilmImage.start()
         # 更新当前页码
-        self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 6, str(self.pageCount)))
+        self.home.lineEdit_showpage.setText("{}页".format(self.page * self.num + 6))
         self.home.lineEdit_showpage.setReadOnly(True)
 
     def switchpage_7(self):
@@ -596,7 +623,8 @@ class Home(QWidget):
         self.ShowFilmImage.film.connect(self.showname)
         self.ShowFilmImage.start()
         # 更新当前页码
-        self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 7, str(self.pageCount)))
+        # self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 7, str(self.pageCount)))
+        self.home.lineEdit_showpage.setText("{}页".format(self.page * self.num + 7))
         self.home.lineEdit_showpage.setReadOnly(True)
 
     def switchpage_8(self):
@@ -605,7 +633,8 @@ class Home(QWidget):
         self.ShowFilmImage.film.connect(self.showname)
         self.ShowFilmImage.start()
         # 更新当前页码
-        self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 8, str(self.pageCount)))
+        # self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 8, str(self.pageCount)))
+        self.home.lineEdit_showpage.setText("{}页".format(self.page * self.num + 8))
         self.home.lineEdit_showpage.setReadOnly(True)
 
     def switchpage_9(self):
@@ -614,7 +643,8 @@ class Home(QWidget):
         self.ShowFilmImage.film.connect(self.showname)
         self.ShowFilmImage.start()
         # 更新当前页码
-        self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 9, str(self.pageCount)))
+        # self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 9, str(self.pageCount)))
+        self.home.lineEdit_showpage.setText("{}页".format(self.page * self.num + 9))
         self.home.lineEdit_showpage.setReadOnly(True)
 
     def switchpage_10(self):
@@ -623,19 +653,21 @@ class Home(QWidget):
         self.ShowFilmImage.film.connect(self.showname)
         self.ShowFilmImage.start()
         # 更新当前页码
-        self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 10, str(self.pageCount)))
+        # self.home.lineEdit_showpage.setText("{}/{}页".format(self.page * self.num + 10, str(self.pageCount)))
+        self.home.lineEdit_showpage.setText("{}页".format(self.page * self.num + 10))
         self.home.lineEdit_showpage.setReadOnly(True)
 
     @Slot()
     def fun(self):
         # 获取总页码
-        result = videoset.count_documents({})
-        if result % 10 == 0:
-            pageCount = result // 10
-        else:
-            pageCount = result // 10 + 1
-        self.pageCount = pageCount
-        self.home.lineEdit_showpage.setText("{}/{}页".format(1, pageCount))
+        # result = videoset.count_documents({})
+        # if result % 10 == 0:
+        #     pageCount = result // 10
+        # else:
+        #     pageCount = result // 10 + 1
+        # self.pageCount = pageCount
+        # self.home.lineEdit_showpage.setText("{}/{}页".format(1, pageCount))
+        self.home.lineEdit_showpage.setText("{}页".format(1))
         self.home.lineEdit_showpage.setReadOnly(True)
 
         self.ShowFilmImage = ShowFilmImage(page=1, search_str=self.search)

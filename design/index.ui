@@ -47,7 +47,7 @@
     </font>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <property name="iconSize">
     <size>
@@ -95,7 +95,7 @@ selection-background-color: darkgray;
    </string>
      </property>
      <property name="placeholderText">
-      <string comment="请输入账户名" extracomment="请输入哦">请输入手机号：</string>
+      <string comment="请输入账户名" extracomment="请输入哦">请输入用户名：</string>
      </property>
      <property name="clearButtonEnabled">
       <bool>true</bool>
@@ -184,7 +184,7 @@ selection-background-color: darkgray;
    </string>
         </property>
         <property name="placeholderText">
-         <string comment="请输入账户名" extracomment="请输入哦">请输入手机号：</string>
+         <string comment="请输入账户名" extracomment="请输入哦">请输入用户名：</string>
         </property>
         <property name="clearButtonEnabled">
          <bool>true</bool>
