@@ -45,8 +45,8 @@
 
 #### 体验版地址(推荐)
 
-- [MacOS](https://gitee.com/shiya_liu/VideoSave/releases/download/v0.1/VideoSave_macos.zip)
-- [Windows](https://gitee.com/shiya_liu/VideoSave/releases/download/v0.1/VideoSave_windows.zip)
+- [MacOS](https://gitee.com/shiya_liu/VideoSave/releases/download/v0.2/VideoSave_macos.zip)
+- [Windows](https://gitee.com/shiya_liu/VideoSave/releases/download/v0.2/VideoSave_windows.zip)
 
 
 
