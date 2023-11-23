@@ -43,36 +43,18 @@
 
 > 体验版增强了查询效率，大大提高了翻页以及搜索时的效率，但由于长期使用其服务是收费的，正在积极寻找合适的SaaS资源。
 
-#### 发布详情
-
- <iframe  
- height=400
- width=90% 
- src="https://gitee.com/shiya_liu/VideoSave/releases"  
- frameborder=0  
- allowfullscreen>
- </iframe>
-
-
-
 #### 体验版地址(推荐)
 
 - [MacOS](https://gitee.com/shiya_liu/VideoSave/releases/download/v0.2/VideoSave_macos.zip)
 - [Windows](https://gitee.com/shiya_liu/VideoSave/releases/download/v0.2/VideoSave_windows.zip)
 
-
+[版本发布详情](https://gitee.com/shiya_liu/VideoSave/releases)
 
 #### ~~下载地址~~
 
 - ~~[MacOS](https://gitee.com/shiya_liu/VideoSave/releases/download/v1.0/VideoSave_macos.zip)~~
 - ~~[Windows](https://gitee.com/shiya_liu/VideoSave/releases/download/v1.0/VideoSave_windows.zip)~~
 - ~~[Source code](https://gitee.com/shiya_liu/VideoSave/archive/refs/tags/v1.0.tar.gz)~~
-
-#### 视频说明
-
-<iframe src="//player.bilibili.com/player.html?aid=918843514&bvid=BV13u4y157HX&cid=1341293654&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-
-
 
 #### 安装过程
 
