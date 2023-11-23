@@ -70,13 +70,9 @@
 
 #### 视频说明
 
- <iframe  
- height=850 
- width=90% 
- src="https://www.bilibili.com/video/BV13u4y157HX/"  
- frameborder=0  
- allowfullscreen>
- </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=918843514&bvid=BV13u4y157HX&cid=1341293654&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
 
 #### 安装过程
 
