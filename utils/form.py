@@ -193,6 +193,15 @@ class Ui_Form(object):
         self.pushButton_page_2 = QPushButton(Form)
         self.pushButton_page_2.setObjectName(u"pushButton_page_2")
         self.pushButton_page_2.setGeometry(QRect(100, 500, 51, 31))
+        self.label_11 = QLabel(Form)
+        self.label_11.setObjectName(u"label_11")
+        self.label_11.setGeometry(QRect(0, 0, 651, 530))
+        font1 = QFont()
+        font1.setPointSize(25)
+        self.label_11.setFont(font1)
+        self.label_11.setStyleSheet(u"background-color: rgb(255, 255, 255);")
+        self.label_11.setAlignment(Qt.AlignCenter)
+        self.label_11.setIndent(30)
         self.label_2.raise_()
         self.label_1.raise_()
         self.label_4.raise_()
@@ -233,6 +242,7 @@ class Ui_Form(object):
         self.pushButton_9.raise_()
         self.pushButton_10.raise_()
         self.pushButton_page_2.raise_()
+        self.label_11.raise_()
 
         self.retranslateUi(Form)
 
@@ -280,5 +290,6 @@ class Ui_Form(object):
         self.pushButton_9.setText(QCoreApplication.translate("Form", u"9", None))
         self.pushButton_10.setText(QCoreApplication.translate("Form", u"10", None))
         self.pushButton_page_2.setText(QCoreApplication.translate("Form", u"\u4e0a\u9875", None))
+        self.label_11.setText(QCoreApplication.translate("Form", u"\u6570\u636e\u6b63\u5728\u52a0\u8f7d\u4e2d \u8bf7\u8010\u5fc3\u7b49\u5f85", None))
     # retranslateUi
 

@@ -39,36 +39,19 @@
 - 点击后无反应时请耐心等待，短时间内连续多次点击可能导致崩溃(Mac系统)或闪退(Windows系统) (这是由于网络带宽限制导致的) 🐍
 - ~~搜索电影只会反馈名称，没有图像以求减少非必要的请求压力~~  (已经取消此限制) 🐲
 
-
-
-# 发版计划
-
-查看历史版本请点击：[发版详情](https://gitee.com/shiya_liu/VideoSave/releases)
-
-| 版本名称 | 修复内容                                                     | 预计发布时间 | 下载地址 |
-| -------- | ------------------------------------------------------------ | ------------ | -------- |
-| v0.3     | 第九页和第一页显示内容一样<br/>取消"我已同意使用该软件"的按钮<br/>修改Gitee为源码<br/>添加发布详情链接<br/>重试下载成功的TS记录到下载中<br/>下载完成提示<br/>下载失败提示<br/>清理错误的下载数据 | 2023-11-25   | 待更新   |
-| v0.4     | 优雅退出 <br/>管理代码质量<br/>                              |              |          |
-|          |                                                              |              |          |
-
-
-
 # 安装使用
 
 > 体验版增强了查询效率，大大提高了翻页以及搜索时的效率，但由于长期使用其服务是收费的，正在积极寻找合适的SaaS资源。
 
-#### 体验版地址(推荐)
 
-- [MacOS](https://gitee.com/shiya_liu/VideoSave/releases/download/v0.2/VideoSave_macos.zip)
-- [Windows](https://gitee.com/shiya_liu/VideoSave/releases/download/v0.2/VideoSave_windows.zip)
 
 [版本发布详情](https://gitee.com/shiya_liu/VideoSave/releases)
 
-#### ~~下载地址~~
+#### 下载地址
 
-- ~~[MacOS](https://gitee.com/shiya_liu/VideoSave/releases/download/v1.0/VideoSave_macos.zip)~~
-- ~~[Windows](https://gitee.com/shiya_liu/VideoSave/releases/download/v1.0/VideoSave_windows.zip)~~
-- ~~[Source code](https://gitee.com/shiya_liu/VideoSave/archive/refs/tags/v1.0.tar.gz)~~
+- [MacOS](https://gitee.com/shiya_liu/VideoSave/releases/download/v1.0/VideoSave_macos.zip)
+- [Windows](https://gitee.com/shiya_liu/VideoSave/releases/download/v1.0/VideoSave_windows.zip)
+- [Source code](https://gitee.com/shiya_liu/VideoSave/archive/refs/tags/v1.0.tar.gz)
 
 #### 安装过程
 
