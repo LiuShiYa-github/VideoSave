@@ -1,8 +1,8 @@
 # VideoSave
 
 [![Python Version](https://img.shields.io/badge/python-3.11+-green)](https://www.python.org)
-[![star](https://gitee.com/shiya_liu/VideoSave/badge/star.svg?theme=white)](https://gitee.com/shiya_liu/VideoSave/stargazers)
-[![fork](https://gitee.com/shiya_liu/VideoSave/badge/fork.svg?theme=white)](https://gitee.com/shiya_liu/VideoSave/members)
+![Github stars](https://img.shields.io/github/stars/LiuShiYa-github/VideoSave.svg)
+![Github stars](https://img.shields.io/github/forks/LiuShiYa-github/VideoSave.svg)
 
 ![Snipaste_2023-11-17_11-25-49](assets/Snipaste_2023-11-17_11-25-49.png)
 
