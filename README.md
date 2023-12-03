@@ -49,9 +49,9 @@
 
 #### 下载地址
 
-- [MacOS](https://gitee.com/shiya_liu/VideoSave/releases/download/v1.0/VideoSave_macos.zip)
+- [MacOS]https://gitee.com/shiya_liu/VideoSave/releases/download/v1.0/VideoSave_macos.zip
 - [Windows](https://gitee.com/shiya_liu/VideoSave/releases/download/v1.0/VideoSave_windows.zip)
-- [Source code](https://gitee.com/shiya_liu/VideoSave/archive/refs/tags/v1.0.tar.gz)
+- [Source code](https://gitee.com/shiya_liu/VideoSave/archive/refs/tags/v1.0.zip)
 
 #### 安装过程
 
