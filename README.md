@@ -145,6 +145,10 @@
 
 作者邮箱：xiaoya.com.521.com@foxmail.com
 
+**QQ群**
+
+![image-20231205174018487](assets/image-20231205174018487.png)
+
 #### 问题反馈
 
 请在下面两个Issue地址中二选一进行反馈，在反馈时请携带日志（程序安装路径下，名为VideoSave.log）
