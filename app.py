@@ -173,7 +173,7 @@ class ShowFilmImage(QThread):
             film_list = []
             num = 0
             for doc in res:
-                if num > 10:
+                if num >= 10:
                     break
                 else:
                     num += 1
@@ -785,47 +785,49 @@ class Home(QWidget):
         """
         显示图片
         """
-        for res in res_list:
-            if res is not None and res_list.index(res) == 0:
+        for res in range(0, len(res_list)):
+            if res == 0:
                 self.home.label_1.setScaledContents(True)
-                pixmap = QPixmap.fromImage(QImage.fromData(res))
+                pixmap = QPixmap.fromImage(QImage.fromData(res_list[res]))
                 self.home.label_1.setPixmap(pixmap)
-            if res is not None and res_list.index(res) == 1:
+            elif res == 1:
                 self.home.label_2.setScaledContents(True)
-                pixmap = QPixmap.fromImage(QImage.fromData(res))
+                pixmap = QPixmap.fromImage(QImage.fromData(res_list[res]))
                 self.home.label_2.setPixmap(pixmap)
-            if res is not None and res_list.index(res) == 2:
+            elif res == 2:
                 self.home.label_3.setScaledContents(True)
-                pixmap = QPixmap.fromImage(QImage.fromData(res))
+                pixmap = QPixmap.fromImage(QImage.fromData(res_list[res]))
                 self.home.label_3.setPixmap(pixmap)
-            if res is not None and res_list.index(res) == 3:
+            elif res == 3:
                 self.home.label_4.setScaledContents(True)
-                pixmap = QPixmap.fromImage(QImage.fromData(res))
+                pixmap = QPixmap.fromImage(QImage.fromData(res_list[res]))
                 self.home.label_4.setPixmap(pixmap)
-            if res is not None and res_list.index(res) == 4:
+            elif res == 4:
                 self.home.label_5.setScaledContents(True)
-                pixmap = QPixmap.fromImage(QImage.fromData(res))
+                pixmap = QPixmap.fromImage(QImage.fromData(res_list[res]))
                 self.home.label_5.setPixmap(pixmap)
-            if res is not None and res_list.index(res) == 5:
+            elif res == 5:
                 self.home.label_6.setScaledContents(True)
-                pixmap = QPixmap.fromImage(QImage.fromData(res))
+                pixmap = QPixmap.fromImage(QImage.fromData(res_list[res]))
                 self.home.label_6.setPixmap(pixmap)
-            if res is not None and res_list.index(res) == 6:
+            elif res == 6:
                 self.home.label_7.setScaledContents(True)
-                pixmap = QPixmap.fromImage(QImage.fromData(res))
+                pixmap = QPixmap.fromImage(QImage.fromData(res_list[res]))
                 self.home.label_7.setPixmap(pixmap)
-            if res is not None and res_list.index(res) == 7:
+            elif res == 7:
                 self.home.label_8.setScaledContents(True)
-                pixmap = QPixmap.fromImage(QImage.fromData(res))
+                pixmap = QPixmap.fromImage(QImage.fromData(res_list[res]))
                 self.home.label_8.setPixmap(pixmap)
-            if res is not None and res_list.index(res) == 8:
+            elif res == 8:
                 self.home.label_9.setScaledContents(True)
-                pixmap = QPixmap.fromImage(QImage.fromData(res))
+                pixmap = QPixmap.fromImage(QImage.fromData(res_list[res]))
                 self.home.label_9.setPixmap(pixmap)
-            if res is not None and res_list.index(res) == 9:
+            elif res == 9:
                 self.home.label_10.setScaledContents(True)
-                pixmap = QPixmap.fromImage(QImage.fromData(res))
+                pixmap = QPixmap.fromImage(QImage.fromData(res_list[res]))
                 self.home.label_10.setPixmap(pixmap)
+
+
 
     @Slot()
     def showname(self, film_list):
