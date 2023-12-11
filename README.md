@@ -49,9 +49,9 @@
 
 #### 下载地址
 
-- [MacOS](https://github.com/LiuShiYa-github/VideoSave/releases/download/v1.0/VideoSave_macos.zip)
-- [Windows](https://github.com/LiuShiYa-github/VideoSave/releases/download/v1.0/VideoSave_windows.zip)
-- [Source code](https://github.com/LiuShiYa-github/VideoSave/archive/refs/tags/v1.0.zip)
+- [MacOS](https://github.com/LiuShiYa-github/VideoSave/releases/download/v1.1-release/VideoSave_macos.zip)
+- [Windows](https://github.com/LiuShiYa-github/VideoSave/releases/download/v1.1-release/VideoSave_windows.zip)
+- [Source code](https://github.com/LiuShiYa-github/VideoSave/archive/refs/tags/v1.1-release.zip)
 
 #### 安装过程
 
